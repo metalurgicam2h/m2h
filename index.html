@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metalurgia 2 Hermanos</title>
+    <style>
+        :root {
+            --azul-principal: #1e3a8a;
+            --azul-secundario: #3b82f6;
+            --azul-claro: #dbeafe;
+            --gris-oscuro: #374151;
+            --blanco: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--gris-oscuro);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
+            color: var(--blanco);
+            padding: 1.5rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231e3a8a"/><path d="M0 0L100 100M100 0L0 100" stroke="%233b82f6" stroke-width="2"/></svg>');
+            color: var(--blanco);
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--blanco);
+            color: var(--azul-principal);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--azul-principal);
+        }
+
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1rem;
+        }
+
+        .grid-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: var(--blanco);
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .grid-info {
+            padding: 1rem;
+        }
+
+        .grid-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--azul-principal);
+        }
+
+        .about {
+            background-color: var(--azul-claro);
+            padding: 4rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about h2 {
+            color: var(--azul-principal);
+            margin-bottom: 1.5rem;
+        }
+
+        .about p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact {
+            padding: 4rem 1rem;
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--azul-principal);
+            color: var(--blanco);
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--blanco);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+            
+            .contact-info {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 767px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--azul-principal);
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i>⚒️</i> Metalurgia 2 Hermanos
+            </div>
+            <nav>
+                <button class="mobile-menu">☰</button>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Expertos en Trabajos de Metalurgia</h1>
+            <p>Creación, reparación y diseño en metal para proyectos residenciales e industriales</p>
+            <a href="#galeria" class="btn">Ver Nuestros Trabajos</a>
+        </div>
+    </section>
+
+    <section class="gallery" id="galeria">
+        <h2 class="gallery-title">Nuestros Trabajos</h2>
+        <div class="masonry-grid" id="gallery-container">
+            <!-- Las imágenes se cargarán aquí dinámicamente -->
+        </div>
+    </section>
+
+    <section class="about" id="nosotros">
+        <div class="about-content">
+            <h2>Sobre Nosotros</h2>
+            <p>En Metalurgia 2 Hermanos nos especializamos en la creación y fabricación de productos metálicos de alta calidad. Con más de 15 años de experiencia, hemos trabajado en proyectos residenciales, comerciales e industriales.</p>
+            <p>Nuestro compromiso es ofrecer soluciones duraderas, funcionales y estéticamente atractivas para cada uno de nuestros clientes.</p>
+            <a href="#contacto" class="btn">Contáctanos</a>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <div class="contact-content">
+            <h2>Contacto</h2>
+            <p>¿Tienes un proyecto en mente? Contáctanos para una cotización gratuita</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i>📞</i>
+                    <span>+505 5777-7940</span>
+                </div>
+                <div class="contact-item">
+                    <i>✉️</i>
+                    <!-- <span>info@metalurgia2hermanos.com</span> -->
+                </div>
+                <div class="contact-item">
+                    <i>📍</i>
+                    <span>Achuapa, León, Nicaragua</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Metalurgia 2 Hermanos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Array de trabajos - aquí puedes agregar tus imágenes
+        const trabajos = [
+            {
+                imagen: "img/Puerta Principal.jpg",
+                titulo: "Puerta Principal",
+                descripcion: "Diseño personalizado en hierro forjado"
+            },
+            {
+                imagen: "img/Barandal de Escalera.jpg",
+                titulo: "Barandal de Escalera",
+                descripcion: "Estructura en acero inoxidable"
+            },
+            {
+                imagen: "img/Mueble Industrial.jpg",
+                titulo: "Mueble Industrial",
+                descripcion: "Estantería con diseño industrial"
+            },
+            {
+                imagen: "img/Reja de Seguridad.jpg",
+                titulo: "Reja de Seguridad",
+                descripcion: "Protección residencial con diseño"
+            },
+            {
+                imagen: "img/Escultura Decorativa.jpg",
+                titulo: "Escultura Decorativa",
+                descripcion: "Arte en metal para jardín"
+            },
+            {
+                imagen: "img/Portones.jpg",
+                titulo: "Portones",
+                descripcion: "Diseño y fabricación de portones de seguridad"
+            }
+        ];
+
+        function cargarGaleria() {
+            const galleryContainer = document.getElementById('gallery-container');
+            
+            trabajos.forEach(trabajo => {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                
+                gridItem.innerHTML = `
+                    <img src="${trabajo.imagen}" alt="${trabajo.titulo}" class="grid-img">
+                    <div class="grid-info">
+                        <h3>${trabajo.titulo}</h3>
+                        <p>${trabajo.descripcion}</p>
+                    </div>
+                `;
+                
+                galleryContainer.appendChild(gridItem);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu');
+            const navMenu = document.querySelector('nav ul');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+            
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('show');
+                });
+            });
+            
+            // Cargar la galería
+            cargarGaleria();
+        });
+    </script>
+</body>
+</html>
